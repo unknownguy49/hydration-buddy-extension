@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hydration Buddy</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Hydration Buddy</h1>
+
+    <label>Reminder Interval:
+      <select id="interval">
+        <option value="60">1 hour</option>
+        <option value="90">1.5 hours</option>
+        <option value="120">2 hours</option>
+        <option value="150">2.5 hours</option>
+        <option value="180">3 hours</option>
+        <option value="210">3.5 hours</option>
+        <option value="240">4 hours</option>
+      </select>
+    </label>
+
+    <label>
+      <input type="checkbox" id="sound">
+      Enable Sound Notification
+    </label>
+
+    <p>
+      <span>Mode:
+        <label class="switch">
+          <input type="checkbox" id="themeToggle">
+          <span class="slider"></span>
+        </label>
+      </span>
+    </p>
+
+    <p>Glasses today: <span id="goalCount">0</span></p>
+    <button id="resetBtn">Reset Count</button>
+  </div>
+
+  <script src="tips.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
