@@ -8,33 +8,28 @@ const hydrationTips = [
   "Water improves digestion and metabolism.",
   "Replace one sugary drink today with water!",
   "Cold water boosts alertness too!",
-  "Your joints need water too!"
+  "Your joints need water too!",
 ];
 
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.get(['interval'], (data) => {
+  chrome.storage.sync.get(["interval"], (data) => {
     const interval = data.interval || 120;
-    chrome.alarms.create('hydrate', {
-      periodInMinutes: interval
+    chrome.alarms.create("hydrate", {
+      periodInMinutes: interval,
     });
   });
 });
 
 chrome.alarms.onAlarm.addListener(() => {
-  chrome.storage.sync.get(['sound', 'goal'], (data) => {
+  chrome.storage.sync.get(["goal"], (data) => {
     const tip = hydrationTips[Math.floor(Math.random() * hydrationTips.length)];
     chrome.notifications.create({
-      type: 'basic',
-      iconUrl: 'icons/icon.png',
-      title: 'Time to Hydrate!',
+      type: "basic",
+      iconUrl: "icons/icon.png",
+      title: "Time to Hydrate!",
       message: tip,
-      priority: 2
+      priority: 2,
     });
-
-    if (data.sound) {
-      const audio = new Audio('sounds/water.mp3');
-      audio.play();
-    }
 
     const newGoal = (data.goal || 0) + 1;
     chrome.storage.sync.set({ goal: newGoal });

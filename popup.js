@@ -1,12 +1,10 @@
 const intervalSelect = document.getElementById("interval");
-const soundCheckbox = document.getElementById("sound");
 const themeToggle = document.getElementById("themeToggle");
 const goalCount = document.getElementById("goalCount");
 const resetBtn = document.getElementById("resetBtn");
 
-chrome.storage.sync.get(["interval", "sound", "theme", "goal"], (data) => {
+chrome.storage.sync.get(["interval", "theme", "goal"], (data) => {
   if (intervalSelect) intervalSelect.value = data.interval || 120;
-  if (soundCheckbox) soundCheckbox.checked = data.sound || false;
   if (themeToggle) themeToggle.checked = data.theme || false;
   if (goalCount) goalCount.innerText = data.goal || 0;
 
@@ -24,12 +22,6 @@ if (intervalSelect) {
     chrome.alarms.clearAll(() => {
       chrome.alarms.create("hydrate", { periodInMinutes: val });
     });
-  });
-}
-
-if (soundCheckbox) {
-  soundCheckbox.addEventListener("change", () => {
-    chrome.storage.sync.set({ sound: soundCheckbox.checked });
   });
 }
 
